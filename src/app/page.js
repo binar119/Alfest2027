@@ -5,7 +5,7 @@ import ContactWidget from "../components/ContactWidget";
 
 export default function Home() {
   const TARGET_DATE = "2027-10-25T00:00:00";
-  const YOUTUBE_VIDEO_ID = "dQw4w9WgXcQ"; 
+  const YOUTUBE_VIDEO_ID = "abholBZz0wE"; 
 
   const [timeLeft, setTimeLeft] = useState({
     Hari: "00",
@@ -67,7 +67,7 @@ export default function Home() {
             WELCOME TO
           </p>
 
-          {/* OKE: Animasi split teks mewah lu tetep dipertahankan disini */}
+          
           <h1
             className="font-display text-4xl md:text-8xl font-bold tracking-wider select-none flex flex-nowrap justify-center items-center whitespace-nowrap overflow-visible"
             style={{ fontFamily: "var(--font-cinzel)" }}
