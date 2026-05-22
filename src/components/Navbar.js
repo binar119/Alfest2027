@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-md bg-bg-main/70 px-6 py-3 md:px-8 md:py-2 flex items-center justify-between md:justify-center">
+    <nav className="sticky top-0 z-50 backdrop-blur-md bg-bg-main/50 px-6 py-3 md:px-8 md:py-2 flex items-center justify-between md:justify-center">
       
       {/* 1. TOMBOL HAMBURGER (Hanya muncul di Mobile / Layar Kecil) */}
       <button 

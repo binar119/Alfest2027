@@ -1,299 +1,231 @@
 "use client";
-import Link from "next/link";
+
 import React, { useState, useEffect } from "react";
-import ContactWidget from "../components/ContactWidget";
 
-export default function Home() {
-  const TARGET_DATE = "2027-10-25T00:00:00";
+export default function ContactWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [isNoticeable, setIsNoticeable] = useState(true);
 
-  const [timeLeft, setTimeLeft] = useState({
-    Hari: "00",
-    Jam: "00",
-    Menit: "00",
-    Detik: "00",
-  });
-
+  // Efek animasi memantul menarik perhatian hanya saat pertama kali masuk website (durasi 4 detik)
   useEffect(() => {
-    const target = new Date(TARGET_DATE).getTime();
-
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = target - now;
-
-      if (difference <= 0) {
-        clearInterval(interval);
-        return;
-      }
-
-      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const h = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((difference % (1000 * 60)) / 1000);
-
-      setTimeLeft({
-        Hari: d < 10 ? `0${d}` : `${d}`,
-        Jam: h < 10 ? `0${h}` : `${h}`,
-        Menit: m < 10 ? `0${m}` : `${m}`,
-        Detik: s < 10 ? `0${s}` : `${s}`,
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
+    const timer = setTimeout(() => {
+      setIsNoticeable(false);
+    }, 4000);
+    return () => clearTimeout(timer);
   }, []);
 
+  // Struktur Data Baru: 1 Kategori memiliki Submenu berisi 2 Contact Person (CP)
+  const contactData = [
+    {
+      id: "pendaftaran",
+      title: "Pendaftaran Lomba",
+      warna: "from-amber-500 to-gold",
+      cpList: [
+        {
+          nama: "Kak Ahmad (CP 1)",
+          nomor: "6281234567890",
+          pesan: "Halo Kak Ahmad, saya ingin bertanya mengenai teknis pendaftaran lomba Alfest 2027...",
+        },
+        {
+          nama: "Kak Ihsan (CP 2)",
+          nomor: "6282345678901",
+          pesan: "Halo Kak Ihsan, saya mau konfirmasi pembayaran pendaftaran kompetisi Alfest 2027...",
+        },
+      ],
+    },
+    {
+      id: "sponsorship",
+      title: "Sponsorship & Kerja Sama",
+      warna: "from-blue-600 to-indigo-600",
+      cpList: [
+        {
+          nama: "Kak Sarah (Sponsorship)",
+          nomor: "6289876543210",
+          pesan: "Halo Panitia Alfest 2027, perusahaan kami tertarik untuk bekerja sama sebagai sponsor...",
+        },
+        {
+          nama: "Kak Syamil (Media Partner)",
+          nomor: "6287654321098",
+          pesan: "Halo Hubungan Masyarakat Alfest 2027, kami dari media partner ingin mengajukan kerja sama...",
+        },
+      ],
+    },
+    {
+      id: "umum",
+      title: "Informasi Umum / Philanthropy",
+      warna: "from-emerald-600 to-teal-600",
+      cpList: [
+        {
+          nama: "Hotline Alfest (Informasi)",
+          nomor: "628555111222",
+          pesan: "Halo Alfest, saya ingin menanyakan info umum seputar jadwal dan lokasi acara...",
+        },
+        {
+          nama: "Kak Fajar (Philanthropy)",
+          nomor: "628444333222",
+          pesan: "Halo Kak Fajar, saya ingin tahu lebih lanjut mengenai program donasi sosial Alfest...",
+        },
+      ],
+    },
+  ];
+
+  const hubungiWhatsApp = (nomor, pesan) => {
+    const url = `https://api.whatsapp.com/send?phone=${nomor}&text=${encodeURIComponent(pesan)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const handleCloseAll = () => {
+    setIsOpen(false);
+    // Beri sedikit delay agar transisi tutup selesai sebelum submenu direset
+    setTimeout(() => setActiveCategory(null), 300);
+  };
+
   return (
-    <main className="min-h-screen w-full bg-bg-main text-white relative">
+    // POSISI SEKARANG DI KANAN BAWAH (right-6)
+    <div className="fixed bottom-6 right-6 z-50 font-sans">
       
-      {/* 1. HERO SECTION */}
-      <div className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden z-10">
-        <img
-          src="/hero_anjay.jpg"
-          alt="hero"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-bg-main/80 backdrop-blur-sm" />
-
-        <div className="relative z-10 flex flex-col items-center gap-6 px-4 w-full max-w-4xl">
-          <p className="text-gold text-xs md:text-sm tracking-[0.4em] uppercase font-display font-medium">
-            WELCOME TO
-          </p>
-
-          <h1
-            className="font-display text-4xl md:text-8xl font-bold tracking-wider select-none flex flex-nowrap justify-center items-center whitespace-nowrap overflow-visible"
-            style={{ fontFamily: "var(--font-cinzel)" }}
+      {/* ================= CONTAINER MENU POP-UP ================= */}
+      <div
+        className={`
+          absolute bottom-18 right-0 w-72 md:w-80
+          bg-bg-card/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4
+          shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden
+          transition-all duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)] origin-bottom-right
+          ${isOpen ? "opacity-100 visible translate-y-0 scale-100" : "opacity-0 invisible translate-y-4 scale-75 pointer-events-none"}
+        `}
+      >
+        <div className="relative w-full overflow-hidden min-h-[240px]">
+          
+          {/* MENU UTAMA (KATEGORI) */}
+          <div
+            className={`w-full transition-all duration-300 flex flex-col gap-3 ${
+              activeCategory ? "-translate-x-full opacity-0 pointer-events-none absolute" : "translate-x-0 opacity-100"
+            }`}
           >
-            {"ALBINAA FESTIVAL".split("").map((letter, index) => {
-              const idleDelay = `${index * 0.1}s`;
-              if (letter === " ") {
-                return <span key={index} className="w-4 md:w-8 shrink-0" />;
-              }
-              return (
-                <span
-                  key={index}
-                  className="inline-block animate-idle-bob"
-                  style={{ animationDelay: idleDelay }}
-                >
-                  <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold animate-gold-shine cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-5 hover:scale-125 hover:from-white hover:to-gold-light hover:drop-shadow-[0_0_20px_rgba(240,201,107,0.9)] relative z-10">
-                    {letter}
-                  </span>
-                </span>
-              );
-            })}
-          </h1>
-
-          <h1
-            className="text-xl md:text-2xl font-bold text-text-muted leading-tight font-display tracking-wide max-w-7xl mt-2"
-            style={{ fontFamily: "var(--font-cinzel)" }}
-          >
-            -2027-
-          </h1>
-
-          <p className="text-gold text-base md:text-xl max-w-md font-sans italic tracking-wider">
-            "Chase The Gold, Shine The World"
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <Link
-              href="/competition"
-              className="bg-gold text-bg-main px-8 py-3 rounded-full font-semibold tracking-wider uppercase text-sm cursor-pointer transition-all duration-300 transform hover:bg-gold-light hover:scale-105 hover:shadow-[0_0_20px_rgba(201,168,76,0.4)] inline-block text-center"
-            >
-              Daftar Sekarang
-            </Link>
-            <button
-              onClick={() => {
-                const element = document.getElementById("tentang-kami");
-                if (element) {
-                  element.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }
-              }}
-              className="border-2 border-gold text-gold bg-transparent px-8 py-3 rounded-full font-semibold tracking-wider uppercase text-sm cursor-pointer transition-all duration-300 transform hover:bg-gold hover:text-bg-main hover:scale-105 hover:shadow-[0_0_25px_rgba(201,168,76,0.5)] inline-block text-center"
-            >
-              Tentang Kami
-            </button>
-          </div>
-
-          <a
-            href="https://www.google.com/maps/place/Al-Binaa+Islamic+Boarding+School/@-6.2125412,107.277854,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69820f88da5f89:0x8712b03af3ca3f17!8m2!3d-6.2125412!4d107.2804289!16s%2Fg%2F11cs4ck83c?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-text-muted hover:text-gold-light transition-all duration-300 group mt-2"
-          >
-            <span className="transition-transform duration-300 group-hover:scale-125">
-              📍
-            </span>
-            <span className="text-sm font-sans tracking-wide underline underline-offset-4 decoration-text-muted/30 group-hover:decoration-gold-light">
-              Albinaa IBS, Bekasi
-            </span>
-          </a>
-
-          <div className="flex gap-4 md:gap-8 border border-text-muted/10 bg-bg-main/40 backdrop-blur-sm rounded-2xl px-6 py-4 md:px-10 mt-4 shadow-inner">
-            {[
-              [timeLeft.Hari, "Hari"],
-              [timeLeft.Jam, "Jam"],
-              [timeLeft.Menit, "Menit"],
-              [timeLeft.Detik, "Detik"],
-            ].map(([val, label]) => (
-              <div key={label} className="flex flex-col items-center min-w-15">
-                <span className="text-3xl md:text-4xl font-bold text-gold font-display tracking-normal">
-                  {val}
-                </span>
-                <span className="text-[10px] text-text-muted uppercase tracking-widest mt-1 font-sans font-medium">
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* JEMBATAN TRANSISI */}
-      <div className="absolute h-40 w-full z-20 pointer-events-none bg-gradient-to-b from-bg-main to-transparent" />
-
-      {/* ========================================================================= */}
-      {/* WADAH MESH GRADIENT RAKSASA */}
-      {/* ========================================================================= */}
-      <div className="bg-idle-mesh w-full relative z-10 shadow-[inner_0_30px_60px_rgba(0,0,0,0.7)]">
-        
-        {/* 2. ABOUT SECTION */}
-        <section id="tentang-kami" className="relative pt-24 pb-12 px-8">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="flex flex-col gap-6">
-              <p className="text-gold text-sm tracking-[0.3em] uppercase">
-                Tentang Kami
-              </p>
-              <h2 className="text-5xl font-bold text-text-main" style={{ fontFamily: "var(--font-cinzel)" }}>
-                What's Alfest?
-              </h2>
-              <p className="text-text-muted leading-relaxed">
-                Alfest adalah festival tahunan yang memadukan kompetisi, seni, dan
-                kepedulian sosial dalam satu malam penuh cahaya. Diselenggarakan
-                oleh siswa-siswi Albinaa IBS, festival ini hadir untuk menginspirasi
-                generasi muda.
-              </p>
-              <p className="text-gold-light text-3xl font-bold italic" style={{ fontFamily: "var(--font-cinzel)" }}>
-                "Satu Malam, Seribu Cerita"
+            <div className="border-b border-white/5 pb-2 mb-1">
+              <h4 className="text-gold font-display text-sm font-semibold tracking-wider uppercase">
+                Hubungi Panitia Alfest
+              </h4>
+              <p className="text-text-muted text-[11px] mt-0.5">
+                Silakan pilih kategori keperluan Anda:
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-gold/20 h-120 md:h-130 relative w-full group bg-bg-main/20 backdrop-blur-md">
-              <div className="absolute inset-0 z-10 pointer-events-none rounded-2xl">
-                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-bg-main/40 to-transparent rounded-l-2xl" />
-                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-bg-main/40 to-transparent rounded-r-2xl" />
+            <div className="flex flex-col gap-2">
+              {contactData.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat)}
+                  className="w-full text-left p-3 rounded-xl bg-white/5 border border-white/5 hover:border-gold/30 transition-all duration-300 group cursor-pointer hover:bg-white/10 flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={`w-2.5 h-2.5 rounded-full bg-gradient-to-r ${cat.warna} shadow-[0_0_10px_currentColor]`} />
+                    <span className="text-xs font-semibold text-text-main group-hover:text-gold-light transition-colors">
+                      {cat.title}
+                    </span>
+                  </div>
+                  <span className="text-text-muted text-xs transition-transform duration-300 group-hover:translate-x-1">
+                    ➔
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* SUBMENU KATEGORI (PILIHAN 2 CP) */}
+          {contactData.map((cat) => (
+            <div
+              key={cat.id}
+              className={`w-full transition-all duration-300 flex flex-col gap-3 ${
+                activeCategory?.id === cat.id ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none absolute"
+              }`}
+            >
+              <div className="border-b border-white/5 pb-2 mb-1 flex items-center gap-2">
+                <button
+                  onClick={() => setActiveCategory(null)}
+                  className="text-gold hover:text-gold-light text-xs font-bold cursor-pointer pr-1 transition-transform hover:-translate-x-1"
+                >
+                  ⬅
+                </button>
+                <div>
+                  <h4 className="text-text-main font-display text-xs font-semibold uppercase tracking-wider">
+                    {cat.title}
+                  </h4>
+                  <p className="text-text-muted text-[10px]">Tersedia 2 Admin Hubungan Person (CP):</p>
+                </div>
               </div>
 
-              <div className="animate-scroll flex items-center gap-6 absolute top-0 bottom-0 whitespace-nowrap" style={{ animationDuration: "50s" }}>
-                {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((i, index) => (
-                  <div key={index} className="min-w-90 h-115 md:min-w-100 md:h-125 bg-bg-card/40 backdrop-blur-xs rounded-xl border border-gold/10 flex items-center justify-center text-text-muted shrink-0 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-gold/30 shadow-md">
-                    Foto {i}
-                  </div>
+              <div className="flex flex-col gap-2">
+                {cat.cpList.map((cp, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => hubungiWhatsApp(cp.nomor, cp.pesan)}
+                    className="w-full text-left p-3 rounded-xl bg-gradient-to-r from-white/5 to-white/[0.02] border border-white/5 hover:border-emerald-500/30 transition-all duration-300 group cursor-pointer hover:bg-white/10"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-xs font-medium text-text-main group-hover:text-emerald-400 transition-colors">
+                          {cp.nama}
+                        </div>
+                        <div className="text-[10px] text-text-muted mt-0.5">
+                          Aktif (Hubungi via WhatsApp)
+                        </div>
+                      </div>
+                      {/* Vektor Logo WA Kecil di dalam Submenu */}
+                      <svg className="w-5 h-5 text-text-muted group-hover:text-emerald-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.288 1.498 4.49 1.499 5.482 0 9.94-4.414 9.943-9.84.002-2.63-1.018-5.101-2.87-6.956-1.853-1.855-4.324-2.877-6.958-2.878-5.487 0-9.947 4.414-9.95 9.842-.001 1.994.521 3.42 1.5 5.124l-.993 3.63 3.738-.973zm11.196-4.664c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.174.2-.298.3-.496.099-.198.05-.372-.025-.521-.075-.148-.672-1.62-.922-2.22-.242-.584-.487-.51-.67-.51-.172-.001-.371-.001-.571-.001-.199 0-.523.074-.797.372-.272.296-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/>
+                      </svg>
+                    </div>
+                  </button>
                 ))}
               </div>
             </div>
-          </div>
-        </section>
+          ))}
 
-        {/* 2B. NEW SECTION: YOUTUBE TRAILER */}
-        <section className="relative py-12 px-8">
-          <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
-            <div className="text-center">
-              <p className="text-gold text-sm tracking-[0.3em] uppercase mb-2">Official Media</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-text-main" style={{ fontFamily: "var(--font-cinzel)" }}>
-                Alfest Trailer
-              </h2>
-            </div>
-            
-            {/* Embed Video Container dengan Aspek Rasio 16:9 yang Responsif */}
-            <div className="w-full aspect-video rounded-2xl overflow-hidden border border-gold/20 shadow-2xl bg-black/40 backdrop-blur-md transition-all duration-500 hover:border-gold/40">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/VIDEO_ID_LU_DI_SINI" // <-- GANTI DENGAN ID VIDEO TRAILER LU
-                title="Alfest Official Trailer"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
-        </section>
+        </div>
+      </div>
 
-        {/* 2C. NEW SECTION: OUR SPONSORS */}
-        <section className="relative py-12 pb-24 px-8">
-          <div className="max-w-5xl mx-auto flex flex-col items-center gap-10">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-text-main tracking-widest uppercase" style={{ fontFamily: "var(--font-cinzel)" }}>
-                Our Sponsors
-              </h2>
-              <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-4 opacity-60" />
-            </div>
+      {/* ================= TOMBOL FLOATING UTAMA ================= */}
+      <button
+        onClick={isOpen ? handleCloseAll : () => setIsOpen(true)}
+        className={`
+          flex items-center justify-center w-15 h-15 rounded-full 
+          bg-gradient-to-tr from-gold to-gold-light text-bg-main
+          shadow-[0_8px_30px_rgba(201,168,76,0.5)] hover:shadow-[0_8px_40px_rgba(240,201,107,0.7)]
+          cursor-pointer transition-all duration-300 ease-out transform active:scale-95 group relative
+          ${isNoticeable ? "animate-bounce scale-110 ring-4 ring-gold/30" : "hover:scale-110"}
+        `}
+        aria-label="Contact Service"
+      >
+        {/* Radar Pulsa Glowing di belakang tombol saat idle */}
+        {!isOpen && (
+          <span className="absolute inset-0 rounded-full bg-gold/40 animate-ping opacity-75 pointer-events-none" />
+        )}
 
-            {/* Wadah Banner Kompilasi Sponsor (1 Gambar Panjang) */}
-            <div className="w-full bg-white/5 backdrop-blur-xs rounded-2xl border border-white/10 p-6 md:p-10 shadow-lg flex justify-center items-center overflow-hidden transition-all duration-300 hover:border-gold/20">
-              <img
-                src="/sponsors_compiled.jpg" // <-- SIMPAN GAMBAR BANNER LU DI FOLDER public/ DENGAN NAMA INI
-                alt="Alfest Event Sponsors"
-                className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_0_15px_rgba(0,0,0,0.6)]"
-              />
-            </div>
-          </div>
-        </section>
+        {/* VEKTOR LOGO BARU (SVG Chat Premium) & Efek Transisi Flip ke Silang */}
+        <div className="relative w-7 h-7 flex items-center justify-center">
+          {/* Ikon Vektor Balon Obrolan */}
+          <svg
+            className={`w-full h-full absolute transition-all duration-300 fill-current ${
+              isOpen ? "rotate-90 opacity-0 scale-50" : "rotate-0 opacity-100 scale-100"
+            }`}
+            viewBox="0 0 24 24"
+          >
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+          </svg>
+          
+          {/* Ikon Silang (Close) */}
+          <span
+            className={`absolute font-sans font-bold text-lg transition-all duration-300 ${
+              isOpen ? "rotate-0 opacity-100 scale-100" : "-rotate-90 opacity-0 scale-50"
+            }`}
+          >
+            ✕
+          </span>
+        </div>
+      </button>
 
-        {/* SPACER HALUS */}
-        <div className="h-16 w-full opacity-20 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-
-        {/* 3. OUR EVENTS SECTION */}
-        <section className="relative py-24 px-8">
-          <div className="max-w-6xl mx-auto flex flex-col items-center gap-16">
-            <h2 className="text-5xl font-bold text-text-main" style={{ fontFamily: "var(--font-cinzel)" }}>
-              Our Events
-            </h2>
-
-            <div className="flex flex-col md:flex-row gap-8 justify-center">
-              {[
-                { nama: "Olimpiad SD", desc: "Kompetisi akademik untuk siswa SD se-kota" },
-                { nama: "Olimpiad SMA", desc: "Kompetisi akademik untuk siswa SMA se-kota" },
-              ].map((event) => (
-                <div key={event.nama} className="relative w-64 h-80 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer bg-bg-main/20 backdrop-blur-md transition-all duration-300 hover:border-gold/50 shadow-lg">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
-                    <div className="w-24 h-24 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-text-muted text-sm">
-                      Logo
-                    </div>
-                    <h3 className="text-text-main font-bold text-lg text-center" style={{ fontFamily: "var(--font-cinzel)" }}>
-                      {event.nama}
-                    </h3>
-                    <p className="text-text-muted text-sm text-center">{event.desc}</p>
-                  </div>
-                  <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-              {[
-                { nama: "Talkshow", desc: "Sesi inspiratif bersama pembicara tamu" },
-                { nama: "Bazaar", desc: "Pameran dan bazar produk kreatif siswa" },
-                { nama: "Philanthropy", desc: "Kegiatan sosial untuk komunitas sekitar" },
-              ].map((event) => (
-                <div key={event.nama} className="relative h-175 md:h-162.5 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer transition-all duration-300 hover:border-gold shadow-2xl bg-bg-main/20 backdrop-blur-md">
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 gap-2">
-                    <h3 className="text-gold font-bold text-xl" style={{ fontFamily: "var(--font-cinzel)" }}>
-                      {event.nama}
-                    </h3>
-                    <p className="text-text-muted text-sm">{event.desc}</p>
-                  </div>
-                  <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-      </div> {/* Akhir Wadah Mesh Raksasa */}
-
-      <ContactWidget />
-    </main>
+    </div>
   );
 }

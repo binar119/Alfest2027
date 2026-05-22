@@ -103,21 +103,25 @@ body {
   animation: scroll 30s linear infinite; /* Kecepatan ideal: 30s */
 }
 
-@keyframes idleMesh {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+@keyframes blob-morph {
+  0%,
   100% {
-    background-position: 0% 50%;
+    d: path(
+      "M210,140C230,190,170,230,120,220C70,210,30,150,50,100C70,50,150,10,190,50C230,90,190,90,210,140Z"
+    );
+  }
+  34% {
+    d: path(
+      "M220,120C240,170,210,220,160,210C110,200,40,130,50,80C60,30,150,10,190,40C230,70,200,70,220,120Z"
+    );
+  }
+  67% {
+    d: path(
+      "M200,150C210,200,140,240,90,210C40,180,50,90,80,50C110,10,160,30,190,80C220,130,190,100,200,150Z"
+    );
   }
 }
 
-.bg-idle-mesh {
-  background: linear-gradient(135deg, #050814, #0b1530, #122247, #050814);
-  background-size: 300% 300%;
-  animation: idleMesh 30s ease infinite; /* Diperlama jadi 30s biar kerja browser makin ringan */
-  will-change: background-position; /* Kasih tau browser buat optimasi bagian ini */
+.animate-morph {
+  animation: blob-morph 12s ease-in-out infinite alternate;
 }
