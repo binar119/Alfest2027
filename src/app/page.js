@@ -68,28 +68,18 @@ export default function Home() {
           </p>
 
           
+          {/* VERSI RINGAN: Animasi tetep mewah, tapi ramah memori server */}
           <h1
-            className="font-display text-4xl md:text-8xl font-bold tracking-wider select-none flex flex-nowrap justify-center items-center whitespace-nowrap overflow-visible"
+            className="font-display text-4xl md:text-8xl font-bold tracking-wider select-none flex flex-wrap justify-center items-center gap-x-2 md:gap-x-4 overflow-visible text-transparent bg-clip-text bg-linear-to-r from-gold via-gold-light to-gold animate-gold-shine"
             style={{ fontFamily: "var(--font-cinzel)" }}
           >
-            {"ALBINAA FESTIVAL".split("").map((letter, index) => {
-              const idleDelay = `${index * 0.1}s`;
-              if (letter === " ") {
-                return <span key={index} className="w-4 md:w-8 shrink-0" />;
-              }
-              return (
-                <span
-                  key={index}
-                  className="inline-block animate-idle-bob"
-                  style={{ animationDelay: idleDelay }}
-                >
-                  <span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-gold via-gold-light to-gold animate-gold-shine cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-5 hover:scale-125 hover:from-white hover:to-gold-light hover:drop-shadow-[0_0_20px_rgba(240,201,107,0.9)] relative z-10">
-                    {letter}
-                  </span>
-                </span>
-              );
-            })}
-          </h1>
+            <span className="inline-block animate-idle-bob transition-all duration-300 hover:-translate-y-5 hover:scale-125 hover:from-white hover:to-gold-light hover:drop-shadow-[0_0_20px_rgba(240,201,107,0.9)] cursor-pointer">
+              ALBINAA
+            </span>
+            <span className="inline-block animate-idle-bob transition-all duration-300 hover:-translate-y-5 hover:scale-125 hover:from-white hover:to-gold-light hover:drop-shadow-[0_0_20px_rgba(240,201,107,0.9)] cursor-pointer" style={{ animationDelay: "0.4s" }}>
+              FESTIVAL
+            </span>
+            </h1>
 
           <h1
             className="text-xl md:text-2xl font-bold text-text-muted leading-tight font-display tracking-wide max-w-7xl mt-2"
