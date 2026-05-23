@@ -19,6 +19,35 @@ export default function Home() {
     setIsMounted(true);
     const target = new Date(TARGET_DATE).getTime();
 
+    // ========================================================
+    // AMAN: Taruh kode document & observer DI DALAM useEffect
+    // ========================================================
+    const elementsToAnimate = document.querySelectorAll('.fade-up-element');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1 
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+        } else {
+          entry.target.classList.remove('appear');
+        }
+      });
+    }, observerOptions);
+
+    elementsToAnimate.forEach(element => {
+      observer.observe(element);
+    });
+
+
+    // ========================================================
+    // KODE COUNTDOWN TIMER (Biarkan tetap di bawahnya)
+    // ========================================================
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const difference = target - now;
@@ -29,9 +58,7 @@ export default function Home() {
       }
 
       const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const h = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
+      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((difference % (1000 * 60)) / 1000);
 
@@ -43,7 +70,10 @@ export default function Home() {
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      elementsToAnimate.forEach(element => observer.unobserve(element));
+    };
   }, []);
 
   return (
@@ -150,7 +180,7 @@ export default function Home() {
       <div className="bg-idle-mesh w-full relative z-10 shadow-[inner_0_30px_60px_rgba(0,0,0,0.7)]">
         
         {/* 2. ABOUT SECTION */}
-        <section id="tentang-kami" className="relative pt-24 pb-12 px-8">
+        <section id="tentang-kami" className="relative pt-24 pb-12 px-8 fade-up-element">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-6">
               <p className="text-gold text-sm tracking-[0.3em] uppercase">

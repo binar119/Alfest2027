@@ -62,17 +62,6 @@ body {
   }
 }
 
-/* 2. KEYFRAMES: Idle Floating/Breathing per Huruf (Wave) */
-@keyframes idleBob {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  } /* Naik dikit secara halus */
-}
-
 /* 3. KEYFRAMES: Auto-Scroll Gallery (keep this) */
 @keyframes scroll {
   0% {
@@ -85,17 +74,6 @@ body {
 
 /* ============== CLASS UTILITAS ANIMASI ============== */
 
-/* Class untuk Kilau Emas */
-.animate-gold-shine {
-  background-size: 200% auto;
-  animation: goldShine 6s ease infinite;
-}
-
-/* Class untuk Idle Floating per Huruf */
-.animate-idle-bob {
-  animation: idleBob 4s ease-in-out infinite;
-}
-
 /* Class untuk Auto-Scroll (keep this) */
 .animate-scroll {
   display: flex;
@@ -103,25 +81,26 @@ body {
   animation: scroll 30s linear infinite; /* Kecepatan ideal: 30s */
 }
 
-@keyframes blob-morph {
-  0%,
-  100% {
-    d: path(
-      "M210,140C230,190,170,230,120,220C70,210,30,150,50,100C70,50,150,10,190,50C230,90,190,90,210,140Z"
-    );
-  }
-  34% {
-    d: path(
-      "M220,120C240,170,210,220,160,210C110,200,40,130,50,80C60,30,150,10,190,40C230,70,200,70,220,120Z"
-    );
-  }
-  67% {
-    d: path(
-      "M200,150C210,200,140,240,90,210C40,180,50,90,80,50C110,10,160,30,190,80C220,130,190,100,200,150Z"
-    );
-  }
+/* Kondisi awal & kondisi saat keluar layar (Fade Out) */
+/* 1. KONDISI AWAL (Taruh di atas) */
+.fade-up-element {
+  opacity: 0 !important;
+  transform: translateY(30px) !important;
+  /* Durasi kembalinya (saat fade out) dibikin cepat tanpa delay biar gak aneh */
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in !important;
+  will-change: opacity, transform;
 }
 
-.animate-morph {
-  animation: blob-morph 12s ease-in-out infinite alternate;
+/* Kondisi saat masuk layar (JavaScript menambahkan .appear) */
+.fade-up-element.appear {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  /* - Durasi muncul (fade in): 0.8s (biar lebih halus dan elegan)
+     - Jeda mulai (delay): 0.3s (ini yang bikin efek TELAT MASUK)
+  */
+  transition:
+    opacity 0.8s ease-out 0.3s,
+    transform 0.8s ease-out 0.3s !important;
 }
