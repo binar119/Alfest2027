@@ -281,40 +281,46 @@ export default function Home() {
             </h2>
 
             {/* INTEGRASI GAMBAR 1 & 2 (Olimpiade) */}
-            <div className="flex flex-col md:flex-row gap-8 justify-center w-full items-center">
+           <div className="flex flex-col md:flex-row gap-8 justify-center w-full items-center">
               {[
-                { nama: "Olimpiad SD", desc: "Kompetisi akademik untuk siswa SD se-kota", imgKey: "olimpiade_sd" },
-                { nama: "Olimpiad SMA", desc: "Kompetisi akademik untuk siswa SMA se-kota", imgKey: "olimpiade_sma" },
+                { nama: "Alimpiad (SD)", desc: "Kompetisi akademik untuk siswa SD ", imgKey: "olimpiade_sd" },
+                { nama: "Alympic (SMA)", desc: "Kompetisi akademik dan sport untuk siswa SMA ", imgKey: "olimpiade_sma" },
               ].map((event) => (
                 <div key={event.nama} className="relative w-full max-w-sm h-80 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer bg-bg-card/40 transition-all duration-300 hover:border-gold/50 shadow-lg">
-                  {/* Gambar Latar Belakang Event */}
-                  <img 
-                    src={`/${event.imgKey}.jpg`}
-                    alt={event.nama}
-                    className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg-main via-bg-main/50 to-transparent" />
                   
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 z-10">
-                    <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center overflow-hidden">
-                      {/* Logo Mini Kompetisi */}
-                      <img 
-                        src={`/logo_${event.imgKey}.png`} 
-                        alt="Icon" 
-                        className="w-10 h-10 object-contain"
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                      />
+                  {/* Wrapped the card contents inside Next.js Link */}
+                  <Link href="/competition" className="block w-full h-full relative z-0">
+                    
+                    {/* Gambar Latar Belakang Event */}
+                    <img 
+                      src={`/${event.imgKey}.jpg`}
+                      alt={event.nama}
+                      className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/50 to-transparent" />
+                    
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 z-10">
+                      <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center overflow-hidden">
+                        {/* Logo Mini Kompetisi */}
+                        <img 
+                          src={`/logo_${event.imgKey}.png`} 
+                          alt="Icon" 
+                          className="w-10 h-10 object-contain"
+                          onError={(e) => { e.target.style.display = 'none'; }}
+                        />
+                      </div>
+                      <h3 className="text-text-main font-bold text-xl text-center tracking-wide" style={{ fontFamily: "var(--font-cinzel)" }}>
+                        {event.nama}
+                      </h3>
+                      <p className="text-text-muted text-xs text-center max-w-xs">{event.desc}</p>
                     </div>
-                    <h3 className="text-text-main font-bold text-xl text-center tracking-wide" style={{ fontFamily: "var(--font-cinzel)" }}>
-                      {event.nama}
-                    </h3>
-                    <p className="text-text-muted text-xs text-center max-w-xs">{event.desc}</p>
-                  </div>
+
+                  </Link>
+
                 </div>
               ))}
             </div>
-
             {/* INTEGRASI GAMBAR 3, 4, 5 (Talkshow, Bazaar, Philanthropy) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
               {[

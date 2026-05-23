@@ -104,3 +104,25 @@ body {
     opacity 0.8s ease-out 0.3s,
     transform 0.8s ease-out 0.3s !important;
 }
+
+@keyframes idleBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes goldShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
