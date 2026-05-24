@@ -152,12 +152,12 @@ function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModa
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         onError={(e) => {
           e.target.style.display = 'none';
-          e.target.parentNode.innerHTML += `<div class="absolute inset-0 bg-gradient-to-tr from-[#111c36] to-bg-main flex items-center justify-center text-text-muted/40 text-[10px] md:text-xs font-mono">Image Cover</div>`;
+          e.target.parentNode.innerHTML += `<div class="absolute inset-0 bg-linear-to-tr from-[#111c36] to-bg-main flex items-center justify-center text-text-muted/40 text-[10px] md:text-xs font-mono">Image Cover</div>`;
         }}
       />
       
       {/* Gradasi Gelap Biar Teks Keliatan */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-[#0a0f1e]/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Logo Kecil Melayang */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-12 md:h-12 bg-black/30 backdrop-blur-md rounded-lg border border-white/10 p-1 md:p-1.5 flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105 group-hover:border-gold/40">
@@ -220,7 +220,7 @@ export default function CompetitionsPage() {
 
           <div className="filter drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] select-none">
             <h1 
-              className="font-display text-4xl md:text-7xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold animate-gold-shine py-1"
+              className="font-display text-4xl md:text-7xl font-extrabold tracking-wider text-transparent bg-clip-text bg-linear-to-r from-gold via-gold-light to-gold animate-gold-shine py-1"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               COMPETITIONS
@@ -233,15 +233,15 @@ export default function CompetitionsPage() {
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-6 w-full justify-center transform-gpu">
             <div className="relative group transform-gpu w-full sm:w-auto">
-              <div className="absolute -inset-1 bg-gradient-to-r from-gold to-gold-light rounded-full blur-md opacity-30 group-hover:opacity-80 group-hover:blur-xl transition duration-500 transform-gpu pointer-events-none" />
+              <div className="absolute -inset-1 bg-linear-to-r from-gold to-gold-light rounded-full blur-md opacity-30 group-hover:opacity-80 group-hover:blur-xl transition duration-500 transform-gpu pointer-events-none" />
               <a
                 href={REGISTRATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative flex items-center justify-center bg-gradient-to-r from-gold via-gold-light to-gold text-bg-main font-display font-bold text-xs md:text-sm tracking-[0.2em] uppercase px-10 py-4 md:px-12 md:py-4.5 rounded-full shadow-[0_10px_30px_rgba(201,168,76,0.2)] hover:shadow-[0_15px_40px_rgba(240,201,107,0.4)] transition-all duration-300 ease-out transform-gpu hover:-translate-y-0.5 active:translate-y-0 select-none cursor-pointer overflow-hidden w-full sm:w-auto"
+                className="relative flex items-center justify-center bg-linear-to-r from-gold via-gold-light to-gold text-bg-main font-display font-bold text-xs md:text-sm tracking-[0.2em] uppercase px-10 py-4 md:px-12 md:py-4.5 rounded-full shadow-[0_10px_30px_rgba(201,168,76,0.2)] hover:shadow-[0_15px_40px_rgba(240,201,107,0.4)] transition-all duration-300 ease-out transform-gpu hover:-translate-y-0.5 active:translate-y-0 select-none cursor-pointer overflow-hidden w-full sm:w-auto"
               >
                 Register Now
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shine_0.8s_ease-in-out] transform-gpu" />
+                <span className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shine_0.8s_ease-in-out] transform-gpu" />
               </a>
             </div>
 
@@ -271,7 +271,7 @@ export default function CompetitionsPage() {
       </section>
       <AlimpiadCard/>
       {/* ================= 2. SECTION ALIMPIAD (GRID LOMBA BARU) ================= */}
-      <section id="arena-alimpiad" className="w-full bg-gradient-to-b from-bg-main to-[#060a14] py-12 md:py-16 px-4 md:px-12 relative z-10">
+      <section id="arena-alimpiad" className="w-full bg-linear-to-b from-bg-main to-[#060a14] py-12 md:py-16 px-4 md:px-12 relative z-10">
         <div className="max-w-6xl mx-auto">
           
           {/* Header Segment ALIMPIAD */}
@@ -312,7 +312,7 @@ export default function CompetitionsPage() {
       </section>
 
       {/* ================= 3. SECTION ALYMPIC SD (GRID LOMBA) ================= */}
-      <section id="arena-lomba" className="w-full bg-gradient-to-b from-[#060a14] to-bg-main py-12 md:py-16 px-4 md:px-12 relative z-10 border-t border-white/5">
+      <section id="arena-lomba" className="w-full bg-linera-to-b from-[#060a14] to-bg-main py-12 md:py-16 px-4 md:px-12 relative z-10 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
           
           {/* Header Segment ALYMPIC */}
@@ -400,7 +400,7 @@ export default function CompetitionsPage() {
               href={REGISTRATION_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-gold to-gold-light text-bg-main text-xs uppercase tracking-widest font-bold px-5 py-3 rounded-xl transition-all shadow-md hover:shadow-gold/20 hover:scale-[1.02]"
+              className="bg-linear-to-r from-gold to-gold-light text-bg-main text-xs uppercase tracking-widest font-bold px-5 py-3 rounded-xl transition-all shadow-md hover:shadow-gold/20 hover:scale-[1.02]"
             >
               Daftar Sekarang
             </a>

@@ -97,7 +97,7 @@ export default function Home() {
           {/* PERBAIKAN ANIMASI IDLE: Dibungkus container div agar drop-shadow tidak merusak jalannya clip-text animate-gold-shine */}
           <div className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)] select-none">
             <h1
-              className="font-display text-4xl md:text-8xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold animate-gold-shine whitespace-nowrap"
+              className="font-display text-3xl md:text-8xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light/80 to-gold animate-gold-shine md:whitespace-nowrap"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               ALBINAA FESTIVAL
@@ -173,14 +173,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* JEMBATAN TRANSISI */}
-      <div className="absolute h-40 w-full z-20 pointer-events-none bg-gradient-to-b from-bg-main to-transparent" />
-
       {/* WADAH MESH GRADIENT RAKSASA */}
-      <div className="bg-idle-mesh w-full relative z-10 shadow-[inner_0_30px_60px_rgba(0,0,0,0.7)]">
+      
         
         {/* 2. ABOUT SECTION */}
-        <section id="tentang-kami" className="relative pt-24 pb-12 px-8 fade-up-element">
+        <section id="tentang-kami" className="relative pt-24 pb-12 px-8 md:fade-up-element">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-6">
               <p className="text-gold text-sm tracking-[0.3em] uppercase">
@@ -270,9 +267,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SPACER HALUS */}
-        <div className="h-16 w-full opacity-20 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-
         {/* 3. OUR EVENTS SECTION */}
         <section className="relative py-24 px-8">
           <div className="max-w-6xl mx-auto flex flex-col items-center gap-16">
@@ -349,8 +343,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-      </div>
 
       <ContactWidget />
     </main>

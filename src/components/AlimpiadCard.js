@@ -90,9 +90,9 @@ export default function AlimpiadSection() {
       </div>
 
       {/* Container Kartu: Flex dengan tinggi dominan dan jarak (gap) yang rapat */}
-      <div className="flex flex-col md:flex-row w-full max-w-[1400px] h-[60vh] md:h-[75vh] gap-3 md:gap-4">
+      <div className="flex flex-col md:flex-row w-full max-w-[1400px] h-auto md:h-[75vh] gap-6 md:gap-4">
         {alimpiadData.map((lomba, index) => (
-          <div key={index} className="w-full md:w-1/2 h-full">
+          <div key={index} className="w-full h-[450px] md:h-full">
             <AlimpiadCard
               cabang={lomba.cabang}
               description={lomba.description}
