@@ -83,7 +83,7 @@ export default function Home() {
       <div className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden z-10">
         {/* Latar Belakang Hero Utama */}
         <img
-          src="/hero_anjay.jpg" 
+          src="/hero_anjay.webp" 
           alt="Alfest 2027 Hero Background"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -97,7 +97,7 @@ export default function Home() {
           {/* PERBAIKAN ANIMASI IDLE: Dibungkus container div agar drop-shadow tidak merusak jalannya clip-text animate-gold-shine */}
           <div className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)] select-none">
             <h1
-              className="font-display text-3xl md:text-8xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light/80 to-gold animate-gold-shine md:whitespace-nowrap"
+              className="font-display text-3xl md:text-8xl font-semibold tracking-wider text-transparent bg-clip-text bg-linear-to-r from-gold via-yellow/70 to-gold animate-gold-shine md:whitespace-nowrap"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               ALBINAA FESTIVAL
@@ -139,7 +139,7 @@ export default function Home() {
           </div>
 
           <a
-            href="https://maps.google.com"
+            href="https://maps.app.goo.gl/cr8cgRvFsaWW2uZP9"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-text-muted hover:text-gold-light transition-all duration-300 group mt-2"
@@ -172,10 +172,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* WADAH MESH GRADIENT RAKSASA */}
       
-        
         {/* 2. ABOUT SECTION */}
         <section id="tentang-kami" className="relative pt-24 pb-12 px-8 md:fade-up-element">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -200,22 +197,22 @@ export default function Home() {
             {/* INTEGRASI SCROLL GALERI FOTO: Sekarang membaca file gambar asli dari folder /public */}
             <div className="overflow-hidden rounded-2xl border border-gold/20 h-120 md:h-130 relative w-full group bg-bg-main/20 backdrop-blur-md">
               <div className="absolute inset-0 z-10 pointer-events-none rounded-2xl">
-                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-bg-main/40 to-transparent rounded-l-2xl" />
+                <div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-bg-main/40 to-transparent rounded-l-2xl" />
                 <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-bg-main/40 to-transparent rounded-r-2xl" />
               </div>
 
               <div className="animate-scroll flex items-center gap-6 absolute top-0 bottom-0 whitespace-nowrap" style={{ animationDuration: "40s" }}>
-                {/* Kamu tinggal siapkan file galeri_1.jpg sampai galeri_6.jpg di folder public/ */}
+                {/* Kamu tinggal siapkan file galeri_1.webp sampai galeri_6.webp di folder public/ */}
                 {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((i, index) => (
                   <div key={index} className="min-w-90 h-115 md:min-w-100 md:h-125 bg-bg-card/40 overflow-hidden rounded-xl border border-gold/10 shrink-0 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-gold/30 shadow-md relative">
                     <img 
-                      src={`/galeri_${i}.jpg`} 
+                      src={`/galeri_${i}.webp`} 
                       alt={`Dokumentasi Alfest ${i}`}
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         // Fallback jika file gambar belum kamu masukkan ke folder public
                         e.target.style.display = 'none';
-                        e.target.parentNode.innerHTML = `<div class="w-full h-full flex items-center justify-center text-text-muted text-sm">Taruh berkas 'public/galeri_${i}.jpg'</div>`;
+                        e.target.parentNode.innerHTML = `<div class="w-full h-full flex items-center justify-center text-text-muted text-sm">Taruh berkas 'public/galeri_${i}.webp'</div>`;
                       }}
                     />
                   </div>
@@ -259,7 +256,7 @@ export default function Home() {
 
             <div className="w-full bg-white/5 backdrop-blur-xs rounded-2xl border border-white/10 p-6 md:p-10 shadow-lg flex justify-center items-center overflow-hidden transition-all duration-300 hover:border-gold/20">
               <img
-                src="/sponsors_compiled.jpg"
+                src="/sponsors_compiled.webp"
                 alt="Alfest Event Sponsors"
                 className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_0_15px_rgba(0,0,0,0.6)]"
               />
@@ -287,7 +284,7 @@ export default function Home() {
                     
                     {/* Gambar Latar Belakang Event */}
                     <img 
-                      src={`/${event.imgKey}.jpg`}
+                      src={`/${event.imgKey}.webp`}
                       alt={event.nama}
                       className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
                       onError={(e) => { e.target.style.display = 'none'; }}
@@ -325,7 +322,7 @@ export default function Home() {
                 <div key={event.nama} className="relative h-80 md:h-96 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer transition-all duration-300 hover:border-gold shadow-2xl bg-bg-card/40">
                   {/* Gambar Latar Belakang Event Card */}
                   <img 
-                    src={`/${event.imgKey}.jpg`}
+                    src={`/${event.imgKey}.webp`}
                     alt={event.nama}
                     className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-55 group-hover:scale-105 transition-all duration-500"
                     onError={(e) => { e.target.style.display = 'none'; }}

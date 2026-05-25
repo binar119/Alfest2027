@@ -9,58 +9,70 @@ import AlimpiadCard from "../../components/AlimpiadCard"
 // ============================================================================
 const daftarLombaALIMPIAD = [
   {
-    cabang: "Lomba Alimpiad 1",
-    description: "Deskripsi placeholder untuk cabang lomba Alimpiad 1.",
+    cabang: "PIDATO",
+    description: "Jadilah singa podium!!!.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_pidato.webp"
   },
   {
-    cabang: "Lomba Alimpiad 2",
+    cabang: "SPEECH",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 2.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_speech.webp"
   },
   {
-    cabang: "Lomba Alimpiad 3",
+    cabang: "MHQ",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 3.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_mhq.jpg"
   },
   {
-    cabang: "Lomba Alimpiad 4",
+    cabang: "PUISI",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 4.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_puisi.jpg"
   },
   {
-    cabang: "Lomba Alimpiad 5",
+    cabang: "CIPTA CERPEN",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 5.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_cerpen.jpg"
   },
   {
-    cabang: "Lomba Alimpiad 6",
+    cabang: "MTQ",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 6.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_mtq.jpg"
   },
   {
-    cabang: "Lomba Alimpiad 7",
+    cabang: "ADZAN",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 7.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_adzan.jpg"
   },
   {
-    cabang: "Lomba Alimpiad 8",
+    cabang: "ALBINAA CERDAS CERMAT",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 8.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_acc.jpg"
   },
   {
-    cabang: "Lomba Alimpiad 9",
+    cabang: "POSTER",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 9.",
     link_logo: "/placeholder.png",
-    link_foto: "/cover_placeholder.jpg"
+    link_foto: "/cover_poster.jpg",
+  },
+  {
+    cabang: "STORY TELLING",
+    description: "Deskripsi placeholder untuk cabang lomba Alimpiad 9.",
+    link_logo: "/placeholder.png",
+    link_foto: "/cover_story.jpg"
+  },
+  {
+    cabang: "ALBINAA SCIENCE EXHIBITION",
+    description: "Deskripsi placeholder untuk cabang lomba Alimpiad 9.",
+    link_logo: "/placeholder.png",
+    link_foto: "/cover_ase.webp"
   }
 ];
 
@@ -140,36 +152,44 @@ const daftarLombaALMPIC = [
 // 2. KOMPONEN CARD LOMBA SD (FULL PHOTO, HOVER ONLY, 2 KOLOM DI HP)
 // ============================================================================
 function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModal }) {
+  // Hubungkan state untuk memantau status error gambar
+  const [imgError, setImgError] = useState(false);
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <div 
       onClick={() => onOpenModal({ cabang, description })}
       className="group relative w-full h-48 md:h-72 rounded-xl md:rounded-2xl overflow-hidden cursor-pointer shadow-[0_8px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_15px_40px_rgba(201,168,76,0.25)] transition-all duration-500 ease-out flex flex-col justify-end bg-neutral-900"
     >
-      {/* Gambar Full Background */}
-      <img 
-        src={link_foto} 
-        alt={`Cover ${cabang}`}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        onError={(e) => {
-          e.target.style.display = 'none';
-          e.target.parentNode.innerHTML += `<div class="absolute inset-0 bg-linear-to-tr from-[#111c36] to-bg-main flex items-center justify-center text-text-muted/40 text-[10px] md:text-xs font-mono">Image Cover</div>`;
-        }}
-      />
+      {/* Kondisional Render: Jika Gambar Error, Tampilkan Komponen Cadangan */}
+      {imgError ? (
+        <div className="absolute inset-0 bg-linear-to-tr from-[#111c36] to-bg-main flex items-center justify-center text-text-muted/40 text-[10px] md:text-xs font-mono">
+          Image Cover
+        </div>
+      ) : (
+        <img 
+          src={link_foto} 
+          alt={`Cover ${cabang}`}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          onError={() => setImgError(true)}
+        />
+      )}
       
       {/* Gradasi Gelap Biar Teks Keliatan */}
       <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Logo Kecil Melayang */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-12 md:h-12 bg-black/30 backdrop-blur-md rounded-lg border border-white/10 p-1 md:p-1.5 flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105 group-hover:border-gold/40">
-        <img 
-          src={link_logo} 
-          alt={`Logo ${cabang}`}
-          className="w-full h-full object-contain filter drop-shadow-sm"
-          onError={(e) => {
-            e.target.style.display = 'none';
-            e.target.parentNode.innerHTML = `<span class="text-xs md:text-lg">🏆</span>`;
-          }}
-        />
+        {logoError ? (
+          <span className="text-xs md:text-lg">🏆</span>
+        ) : (
+          <img 
+            src={link_logo} 
+            alt={`Logo ${cabang}`}
+            className="w-full h-full object-contain filter drop-shadow-sm"
+            onError={() => setLogoError(true)}
+          />
+        )}
       </div>
 
       {/* Konten Teks */}
@@ -204,7 +224,7 @@ export default function CompetitionsPage() {
         {/* GAMBAR BACKGROUND HERO BARU */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
-            src="/competition_hero.jpg"
+            src="/competition_hero.webp"
             alt="Alfest Competitions Hero"
             className="w-full h-full object-cover object-center"
           />
@@ -360,7 +380,7 @@ export default function CompetitionsPage() {
         onClick={() => setActiveModal(null)}
       >
         <div
-          className={`bg-[#0a0f1e] border border-gold/20 w-full max-w-lg p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] transition-all duration-300 transform ${
+          className={`bg-bg-main border border-gold/20 w-full max-w-lg p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] transition-all duration-300 transform ${
             activeModal ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
           }`}
           onClick={(e) => e.stopPropagation()} 
