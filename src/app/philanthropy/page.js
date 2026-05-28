@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import ContactWidget from "@/components/ContactWidget";
@@ -44,7 +46,7 @@ export default function PhilanthropyPage() {
             className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-wide text-transparent bg-clip-text bg-linear-to-r from-gold via-gold-light/50 to-gold animate-gold-shine py-1"
             style={{ fontFamily: "var(--font-cinzel)" }}
           >
-            ALFEST PHILANTHROPY
+            ALBINAA FESTIVAL PHILANTHROPY
           </h1>
           <p className="text-text-muted max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             Bentuk kepedulian nyata panitia dan seluruh peserta Alfest untuk berbagi kebahagiaan bersama saudara-saudara kita yang membutuhkan di wilayah lingkar luar masyarakat.
@@ -158,21 +160,66 @@ export default function PhilanthropyPage() {
 
         </div>
 
-        {/* 4. DETAILS EXPANSION (TRANSPARENCY & ALUR) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-bg-card/20 border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-xs">
-          <div className="space-y-3">
-            <h3 className="text-lg font-bold text-gold-light">Misi Kemanusiaan Kami</h3>
-            <p className="text-sm md:text-base text-text-muted leading-relaxed">
+        {/* ================= 4. DETAILS EXPANSION (FIXED & FULLY CENTERED) ================= */}
+        {/* Kontainer dibersihkan dari grid/flex menyimpang dan dipaksa text-center murni */}
+        <div className="w-full flex flex-col items-center justify-center text-center py-6 px-4">
+          <div className="max-w-2xl w-full flex flex-col items-center justify-center text-center space-y-4">
+            
+            {/* JUDUL: Besar, Megah, Centered */}
+            <h3 
+              className="text-6xl sm:text-4xl md:text-5xl font-bold font-display text-white tracking-wide text-center" 
+              style={{ fontFamily: "var(--font-cinzel)" }}
+            >
+              Misi Kemanusiaan Kami
+            </h3>
+            
+            {/* DESKRIPSI: Rata tengah mutlak dengan lebar konten dibatasi max-w-xl agar simetris */}
+            <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed opacity-95 text-center max-w-xl font-sans">
               Alfest Philanthropy bukan sekadar agenda pelengkap festival, melainkan misi utama untuk menyalurkan energi positif dari pemuda. Seluruh donasi yang terkumpul dari para donatur dan sebagian keuntungan pendaftaran kompetisi akan dialokasikan penuh tanpa potongan operasional.
             </p>
-          </div>
-          <div className="space-y-3">
-            <h3 className="text-lg font-bold text-gold-light">Penyaluran Transparan</h3>
-            <ul className="text-sm md:text-base text-text-muted space-y-2.5 list-disc pl-5 leading-relaxed">
-              <li>Laporan mutasi dana masuk diperbarui berkala via kanal resmi panitia.</li>
-              <li>Penyediaan paket sembako dibeli langsung melalui UMKM daerah lokal tujuan guna membantu roda ekonomi warga sekitar.</li>
-              <li>Sesi trauma healing dan edukasi interaktif gratis dipandu langsung oleh tim relawan internal Alfest.</li>
+
+            {/* JUDUL: Besar, Megah, Centered */}
+            <h3 
+              className="text-6xl sm:text-4xl md:text-5xl font-bold font-display text-white tracking-wide text-center mt-6" 
+              style={{ fontFamily: "var(--font-cinzel)" }}
+            >
+              Penyaluran Transparan
+            </h3>
+
+{/* DESKRIPSI: List Penyaluran Transparan dengan titik di samping, posisi blok di tengah */}
+            <ul className="text-sm sm:text-base md:text-lg text-text-muted space-y-4 max-w-xl w-full flex flex-col items-center font-sans">
+              <div className="text-left space-y-4 w-full max-w-md sm:max-w-lg">
+                
+                {/* Poin 1 */}
+                <li className="flex items-start gap-3 opacity-95 text-left">
+                  <span className="text-white text-lg leading-none mt-1 shrink-0">•</span>
+                  <p className="leading-relaxed">
+                    Laporan mutasi dana masuk diperbarui berkala via kanal resmi panitia.
+                  </p>
+                </li>
+                
+                {/* Poin 2 */}
+                <li className="flex items-start gap-3 opacity-95 text-left">
+                  <span className="text-white text-lg leading-none mt-1 shrink-0">•</span>
+                  <p className="leading-relaxed">
+                    Penyediaan paket sembako dibeli langsung melalui UMKM daerah lokal tujuan guna membantu roda ekonomi warga sekitar.
+                  </p>
+                </li>
+                
+                {/* Poin 3 */}
+                <li className="flex items-start gap-3 opacity-95 text-left">
+                  <span className="text-white text-lg leading-none mt-1 shrink-0">•</span>
+                  <p className="leading-relaxed">
+                    Sesi trauma healing dan edukasi interaktif gratis dipandu langsung oleh tim relawan internal Alfest.
+                  </p>
+                </li>
+
+              </div>
             </ul>
+
+        
+        
+
           </div>
         </div>
 
@@ -217,7 +264,7 @@ export default function PhilanthropyPage() {
           </div>
         </div>
       </div>
-      <ContactWidget/>
+      <ContactWidget />
     </div>
   );
 }

@@ -11,67 +11,67 @@ const daftarLombaALIMPIAD = [
   {
     cabang: "PIDATO",
     description: "Jadilah singa podium!!!.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_pidato.webp"
   },
   {
     cabang: "SPEECH",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 2.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_speech.webp"
   },
   {
     cabang: "MHQ",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 3.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_mhq.jpg"
   },
   {
     cabang: "PUISI",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 4.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_puisi.jpg"
   },
   {
     cabang: "CIPTA CERPEN",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 5.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_cerpen.jpg"
   },
   {
     cabang: "MTQ",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 6.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_mtq.jpg"
   },
   {
     cabang: "ADZAN",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 7.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_adzan.jpg"
   },
   {
     cabang: "ALBINAA CERDAS CERMAT",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 8.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_acc.jpg"
   },
   {
     cabang: "POSTER",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 9.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_poster.jpg",
   },
   {
     cabang: "STORY TELLING",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 9.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_story.jpg"
   },
   {
     cabang: "ALBINAA SCIENCE EXHIBITION",
     description: "Deskripsi placeholder untuk cabang lomba Alimpiad 9.",
-    link_logo: "/placeholder.png",
+    link_logo: "/logo_olimpiade_sma.png",
     link_foto: "/cover_ase.webp"
   }
 ];
@@ -179,7 +179,7 @@ function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModa
       <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Logo Kecil Melayang */}
-      <div className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-12 md:h-12 bg-black/30 backdrop-blur-md rounded-lg border border-white/10 p-1 md:p-1.5 flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105 group-hover:border-gold/40">
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-12 md:h-12 bg-black/30 backdrop-blur-md rounded-lg border border-white/0 p-1 md:p-1.5 flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105 group-hover:border-gold/40">
         {logoError ? (
           <span className="text-xs md:text-lg">🏆</span>
         ) : (
@@ -235,7 +235,7 @@ export default function CompetitionsPage() {
 
         <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto gap-2 md:gap-3 transform-gpu">
           <p className="text-gold text-xs md:text-sm font-display font-medium tracking-[0.4em] uppercase">
-            Alfest 2027 Arena
+            Albinaa festival 2027
           </p>
 
           <div className="filter drop-shadow-[0_4px_15px_rgba(0,0,0,0.9)] select-none">

@@ -10,9 +10,9 @@ export default function ContactWidget() {
   // ================= EDITABLE DATA SETTINGS =================
   const whatsappContacts = [
     {
-      nama: "Kak Ahmad (CP 1)",
+      nama: "Kak Haris Ikhwan (CP 1)",
       nomor: "6281234567890",
-      pesan: "Halo Kak Ahmad, saya ingin bertanya mengenai teknis Alfest 2027...",
+      pesan: "Halo Kak Haris, saya ingin bertanya mengenai teknis Alfest 2027...",
     },
     {
       nama: "Kak Ihsan (CP 2)",

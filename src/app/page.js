@@ -1,7 +1,10 @@
 "use client";
+import Image from "next/image"
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import ContactWidget from "../components/ContactWidget";
+import EventGrid from "../components/EventGrid";
+import GalleryCarousel from "../components/GalleryCarousel";
 
 export default function Home() {
   const TARGET_DATE = "2027-10-25T00:00:00";
@@ -82,10 +85,13 @@ export default function Home() {
       {/* 1. HERO SECTION */}
       <div className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden z-10">
         {/* Latar Belakang Hero Utama */}
-        <img
-          src="/hero_anjay.webp" 
-          alt="Alfest 2027 Hero Background"
-          className="absolute inset-0 w-full h-full object-cover"
+        <Image
+        src="/hero_anjay.webp" 
+        alt="Alfest 2027 Hero Background"
+        fill                   // 1. This bypasses the width/height requirement
+        priority               // 2. Preloads the image immediately for fast LCP speeds
+        sizes="100vw"          // 3. Tells the engine it will occupy 100% of the viewport width
+        className="object-cover" // 4. Keeps the image aspect-ratio clean without stretching
         />
         <div className="absolute inset-0 bg-bg-main/80 backdrop-blur-sm" />
 
@@ -153,22 +159,33 @@ export default function Home() {
           </a>
 
           {/* COUNTDOWN TIMER */}
-          <div className="flex gap-4 md:gap-8 border border-text-muted/10 bg-bg-main/40 backdrop-blur-sm rounded-2xl px-6 py-4 md:px-10 mt-4 shadow-inner">
-            {[
-              [isMounted ? timeLeft.Hari : "00", "Hari"],
-              [isMounted ? timeLeft.Jam : "00", "Jam"],
-              [isMounted ? timeLeft.Menit : "00", "Menit"],
-              [isMounted ? timeLeft.Detik : "00", "Detik"],
-            ].map(([val, label]) => (
-              <div key={label} className="flex flex-col items-center min-w-15">
-                <span className="text-3xl md:text-4xl font-bold text-gold font-display tracking-normal">
-                  {val}
-                </span>
-                <span className="text-[10px] text-text-muted uppercase tracking-widest mt-1 font-sans font-medium">
-                  {label}
-                </span>
-              </div>
-            ))}
+          <div className="flex flex-col items-center gap-3">
+            {/* Title on top of the countdown */}
+            <span 
+              className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-gold/80"
+              style={{ fontFamily: "var(--font-cinzel)" }} // Matching your project's header font variable
+            >
+              COUNTDOWN TO ALFEST 2027
+            </span>
+
+            {/* Your Original Countdown Grid */}
+            <div className="flex gap-4 md:gap-8 border border-text-muted/10 bg-bg-main/40 backdrop-blur-sm rounded-2xl px-6 py-4 md:px-10 shadow-inner">
+              {[
+                [isMounted ? timeLeft.Hari : "00", "Hari"],
+                [isMounted ? timeLeft.Jam : "00", "Jam"],
+                [isMounted ? timeLeft.Menit : "00", "Menit"],
+                [isMounted ? timeLeft.Detik : "00", "Detik"],
+              ].map(([val, label]) => (
+                <div key={label} className="flex flex-col items-center min-w-15">
+                  <span className="text-3xl md:text-4xl font-bold text-gold font-display tracking-normal">
+                    {val}
+                  </span>
+                  <span className="text-[10px] text-text-muted uppercase tracking-widest mt-1 font-sans font-medium">
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -195,30 +212,7 @@ export default function Home() {
             </div>
 
             {/* INTEGRASI SCROLL GALERI FOTO: Sekarang membaca file gambar asli dari folder /public */}
-            <div className="overflow-hidden rounded-2xl border border-gold/20 h-120 md:h-130 relative w-full group bg-bg-main/20 backdrop-blur-md">
-              <div className="absolute inset-0 z-10 pointer-events-none rounded-2xl">
-                <div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-bg-main/40 to-transparent rounded-l-2xl" />
-                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-bg-main/40 to-transparent rounded-r-2xl" />
-              </div>
-
-              <div className="animate-scroll flex items-center gap-6 absolute top-0 bottom-0 whitespace-nowrap" style={{ animationDuration: "40s" }}>
-                {/* Kamu tinggal siapkan file galeri_1.webp sampai galeri_6.webp di folder public/ */}
-                {[1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6].map((i, index) => (
-                  <div key={index} className="min-w-90 h-115 md:min-w-100 md:h-125 bg-bg-card/40 overflow-hidden rounded-xl border border-gold/10 shrink-0 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-gold/30 shadow-md relative">
-                    <img 
-                      src={`/galeri_${i}.webp`} 
-                      alt={`Dokumentasi Alfest ${i}`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback jika file gambar belum kamu masukkan ke folder public
-                        e.target.style.display = 'none';
-                        e.target.parentNode.innerHTML = `<div class="w-full h-full flex items-center justify-center text-text-muted text-sm">Taruh berkas 'public/galeri_${i}.webp'</div>`;
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <GalleryCarousel/>
           </div>
         </section>
 
@@ -313,31 +307,7 @@ export default function Home() {
               ))}
             </div>
             {/* INTEGRASI GAMBAR 3, 4, 5 (Talkshow, Bazaar, Philanthropy) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-              {[
-                { nama: "Talkshow", desc: "Sesi inspiratif bersama pembicara tamu", imgKey: "talkshow" },
-                { nama: "Bazaar", desc: "Pameran dan bazar produk kreatif siswa", imgKey: "bazaar" },
-                { nama: "Philanthropy", desc: "Kegiatan sosial untuk komunitas sekitar", imgKey: "philanthropy" },
-              ].map((event) => (
-                <div key={event.nama} className="relative h-80 md:h-96 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer transition-all duration-300 hover:border-gold shadow-2xl bg-bg-card/40">
-                  {/* Gambar Latar Belakang Event Card */}
-                  <img 
-                    src={`/${event.imgKey}.webp`}
-                    alt={event.nama}
-                    className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-55 group-hover:scale-105 transition-all duration-500"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg-main via-bg-main/30 to-transparent" />
-
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 gap-2 z-10">
-                    <h3 className="text-gold font-bold text-2xl tracking-wide" style={{ fontFamily: "var(--font-cinzel)" }}>
-                      {event.nama}
-                    </h3>
-                    <p className="text-text-main/90 text-sm font-medium leading-relaxed max-w-xs">{event.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <EventGrid/>
           </div>
         </section>
 
