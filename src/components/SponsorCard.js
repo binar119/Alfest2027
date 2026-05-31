@@ -29,7 +29,7 @@ export default function SponsorCard({ tier }) {
       <div className="mt-auto">
         <a
           href="/proposal.pdf"
-          download={`Proposal_Sponsorship_${tier.title}_Alfest_2027.pdf`}
+          download={`Proposal_Sponsorship_Alfest_2027.pdf`}
           className="block w-full py-3 text-center text-sm font-semibold text-slate-200 bg-slate-800/80 hover:bg-amber-500 hover:text-slate-950 rounded-xl transition-all duration-200 border border-slate-700/50 hover:border-amber-500"
         >
           Pilih Paket & Unduh Detail

@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
       <body className="font-sans">
         <Navbar />
         {children}
+        <span> anjaii</span>
       </body>
     </html>
   )

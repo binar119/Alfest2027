@@ -291,7 +291,7 @@ export default function CompetitionsPage() {
       </section>
       <AlimpiadCard/>
       {/* ================= 2. SECTION ALIMPIAD (GRID LOMBA BARU) ================= */}
-      <section id="arena-alimpiad" className="w-full bg-linear-to-b from-bg-main to-[#060a14] py-12 md:py-16 px-4 md:px-12 relative z-10">
+      <section id="alimpiad-sma" className="w-full bg-linear-to-b from-bg-main to-[#060a14] py-12 md:py-16 px-4 md:px-12 relative z-10">
         <div className="max-w-6xl mx-auto">
           
           {/* Header Segment ALIMPIAD */}
@@ -332,7 +332,7 @@ export default function CompetitionsPage() {
       </section>
 
       {/* ================= 3. SECTION ALYMPIC SD (GRID LOMBA) ================= */}
-      <section id="arena-lomba" className="w-full bg-linera-to-b from-[#060a14] to-bg-main py-12 md:py-16 px-4 md:px-12 relative z-10 border-t border-white/5">
+      <section id="alympic-sd" className="w-full bg-linera-to-b from-[#060a14] to-bg-main py-12 md:py-16 px-4 md:px-12 relative z-10 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
           
           {/* Header Segment ALYMPIC */}

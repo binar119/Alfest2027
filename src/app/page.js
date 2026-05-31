@@ -79,6 +79,20 @@ export default function Home() {
     };
   }, []);
 
+  const eventsData = [
+    { 
+      nama: "Alimpiad (SMA)", 
+      desc: "Kompetisi akademik untuk siswa SMA ", 
+      imgKey: "olimpiade_sma",
+      sectionId: "alimpiad-sma" // <-- Variable for your target section ID
+    },
+    { 
+      nama: "Alympic (SD)", 
+      desc: "Kompetisi akademik dan sport untuk siswa SD ", 
+      imgKey: "olimpiade_sd",
+      sectionId: "alympic-sd" // <-- Variable for your target section ID
+    },
+  ];
   return (
     <main className="min-h-screen w-full bg-bg-main text-white relative">
       
@@ -103,7 +117,7 @@ export default function Home() {
           {/* PERBAIKAN ANIMASI IDLE: Dibungkus container div agar drop-shadow tidak merusak jalannya clip-text animate-gold-shine */}
           <div className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)] select-none">
             <h1
-              className="font-display text-3xl md:text-8xl font-semibold tracking-wider text-transparent bg-clip-text bg-linear-to-r from-gold via-yellow/70 to-gold animate-gold-shine md:whitespace-nowrap"
+              className="font-display text-3xl md:text-8xl font-semibold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-200 to-yellow-500 mb-4 md:whitespace-nowrap"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               ALBINAA FESTIVAL
@@ -267,49 +281,70 @@ export default function Home() {
 
             {/* INTEGRASI GAMBAR 1 & 2 (Olimpiade) */}
            <div className="flex flex-col md:flex-row gap-8 justify-center w-full items-center">
-              {[
-                { nama: "Alimpiad (SD)", desc: "Kompetisi akademik untuk siswa SD ", imgKey: "olimpiade_sd" },
-                { nama: "Alympic (SMA)", desc: "Kompetisi akademik dan sport untuk siswa SMA ", imgKey: "olimpiade_sma" },
-              ].map((event) => (
-                <div key={event.nama} className="relative w-full max-w-sm h-80 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer bg-bg-card/40 transition-all duration-300 hover:border-gold/50 shadow-lg">
+            {eventsData.map((event) => (
+              <div 
+                key={event.nama} 
+                className="relative w-full max-w-sm h-80 rounded-2xl overflow-hidden border border-gold/20 group cursor-pointer bg-bg-card/40 transition-all duration-300 hover:border-gold/50 shadow-lg"
+              >
+                {/* Appending the specific sectionId parameter to the target href */}
+                <Link href={`/competition#${event.sectionId}`} className="block w-full h-full relative z-0">
                   
-                  {/* Wrapped the card contents inside Next.js Link */}
-                  <Link href="/competition" className="block w-full h-full relative z-0">
-                    
-                    {/* Gambar Latar Belakang Event */}
-                    <img 
-                      src={`/${event.imgKey}.webp`}
-                      alt={event.nama}
-                      className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/50 to-transparent" />
-                    
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 z-10">
-                      <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center overflow-hidden">
-                        {/* Logo Mini Kompetisi */}
-                        <img 
-                          src={`/logo_${event.imgKey}.png`} 
-                          alt="Icon" 
-                          className="w-10 h-10 object-contain"
-                          onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                      </div>
-                      <h3 className="text-text-main font-bold text-xl text-center tracking-wide" style={{ fontFamily: "var(--font-cinzel)" }}>
-                        {event.nama}
-                      </h3>
-                      <p className="text-text-muted text-xs text-center max-w-xs">{event.desc}</p>
+                  {/* Gambar Latar Belakang Event */}
+                  <img 
+                    src={`/${event.imgKey}.webp`}
+                    alt={event.nama}
+                    className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/50 to-transparent" />
+                  
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 z-10">
+                    <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center overflow-hidden">
+                      {/* Logo Mini Kompetisi */}
+                      <img 
+                        src={`/logo_${event.imgKey}.png`} 
+                        alt="Icon" 
+                        className="w-10 h-10 object-contain"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
                     </div>
-
-                  </Link>
-
-                </div>
-              ))}
-            </div>
+                    <h3 className="text-text-main font-bold text-xl text-center tracking-wide" style={{ fontFamily: "var(--font-cinzel)" }}>
+                      {event.nama}
+                    </h3>
+                    <p className="text-text-muted text-xs text-center max-w-xs">{event.desc}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
             {/* INTEGRASI GAMBAR 3, 4, 5 (Talkshow, Bazaar, Philanthropy) */}
             <EventGrid/>
-          </div>
+          </div> 
+
+          <div className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)] select-none items-center justify-center text-center mt-10 mb-10">
+            <h1
+              className=" text-3xl md:text-5xl font-semibold tracking-wider bg-clip-text bg-linear-to-r text-white md:whitespace-nowrap mt-20"
+              style={{ fontFamily: "var(--font-cinzel)" }}
+            >
+              EVENT TIMELINE
+            </h1>
+            <img
+                src="/sponsors_compiled.webp"
+                alt="Alfest Event Sponsors"
+                className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_0_15px_rgba(0,0,0,0.6)] mt-20"
+              />
+          </div>   
+
         </section>
+
+        <div className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.7)] select-none items-center justify-center text-center mt-10 mb-10">
+            <h1
+              className=" text-3xl md:text-2xl font-semibold tracking-wider bg-clip-text bg-linear-to-r text-white md:whitespace-nowrap"
+              style={{ fontFamily: "var(--font-cinzel)" }}
+            >
+              READY FOR ALBINAA FESTIVAL? 
+            </h1>
+          </div>   
 
       <ContactWidget />
     </main>

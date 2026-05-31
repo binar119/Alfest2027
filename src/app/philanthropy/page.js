@@ -46,7 +46,7 @@ export default function PhilanthropyPage() {
             className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-wide text-transparent bg-clip-text bg-linear-to-r from-gold via-gold-light/50 to-gold animate-gold-shine py-1"
             style={{ fontFamily: "var(--font-cinzel)" }}
           >
-            ALBINAA FESTIVAL PHILANTHROPY
+           BAKTI SOSIAL ALBINAA FESTIVAL 
           </h1>
           <p className="text-text-muted max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
             Bentuk kepedulian nyata panitia dan seluruh peserta Alfest untuk berbagi kebahagiaan bersama saudara-saudara kita yang membutuhkan di wilayah lingkar luar masyarakat.

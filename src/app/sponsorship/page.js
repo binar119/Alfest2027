@@ -43,6 +43,14 @@ export default function SponsorshipPage() {
       shadowColor: "hover:shadow-purple-500/50",
       benefits: ["Hak penamaan event (Alfest 2027 dipersembahkan oleh Brand Anda)", "Logo eksklusif di main stage & tiket masuk", "Stan VIP Utama di lokasi strategis", "Hak distribusi produk tunggal di area festival", "Durasi promosi khusus di panggung utama setiap hari (10 menit)", "Plakat penghargaan fisik eksklusif"],
     },
+    {
+      title: "TAJIR BOS",
+      desc: "POKOKNYA LU ORG TETRATIJIR SEDUINA!!! GILE GW RESPEK",
+      logoPlaceholder: "DIAMOND",
+      textColor: "text-red-600",
+      shadowColor: "hover:shadow-red-500/50",
+      benefits: ["respek dari seluruh kba", "lifetime makan matham gratiss tis tis", "ilfe time al inn", "lebih berkuasa dibanding mudir"],
+    },
   ];
 
   return (
