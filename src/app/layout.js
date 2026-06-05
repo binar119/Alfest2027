@@ -12,11 +12,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${dmSans.variable}`}>
+    /* Adding "dark" right here inside the className string establishes your dark theme 
+      as the native default across all components, preventing any light flash on load.
+    */
+    <html lang="en" className={`dark ${cinzel.variable} ${dmSans.variable}`} style={{ scrollBehavior: "smooth" }}>
       <body className="font-sans">
         <Navbar />
         {children}
-        <span> anjaii</span>
       </body>
     </html>
   )

@@ -80,7 +80,7 @@ export default function AlimpiadSection() {
   return (
     <section className="w-full bg-bg-main px-4 py-10 md:px-6 md:py-16 flex flex-col items-center">
       <div className="mb-10 text-center z-10 relative">
-        <h2 className="font-display text-3xl md:text-5xl font-bold text-white tracking-widest uppercase">
+        <h2 className="font-display text-3xl md:text-5xl font-bold text-text-main tracking-widest uppercase">
           Alimpiad <span className="text-gold">SPORT</span>
         </h2>
         <p className="text-text-muted mt-2 font-sans tracking-wide">

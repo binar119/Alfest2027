@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ContactWidget from "../../components/ContactWidget";
 import AlimpiadCard from "../../components/AlimpiadCard"
+
 // ============================================================================
 // 1A. AREA EDIT DATA LOMBA ALIMPIAD (9 LOMBA - PLACEHOLDER)
 // ============================================================================
@@ -152,7 +153,6 @@ const daftarLombaALMPIC = [
 // 2. KOMPONEN CARD LOMBA SD (FULL PHOTO, HOVER ONLY, 2 KOLOM DI HP)
 // ============================================================================
 function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModal }) {
-  // Hubungkan state untuk memantau status error gambar
   const [imgError, setImgError] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
@@ -161,7 +161,6 @@ function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModa
       onClick={() => onOpenModal({ cabang, description })}
       className="group relative w-full h-48 md:h-72 rounded-xl md:rounded-2xl overflow-hidden cursor-pointer shadow-[0_8px_20px_rgba(0,0,0,0.6)] hover:shadow-[0_15px_40px_rgba(201,168,76,0.25)] transition-all duration-500 ease-out flex flex-col justify-end bg-neutral-900"
     >
-      {/* Kondisional Render: Jika Gambar Error, Tampilkan Komponen Cadangan */}
       {imgError ? (
         <div className="absolute inset-0 bg-linear-to-tr from-[#111c36] to-bg-main flex items-center justify-center text-text-muted/40 text-[10px] md:text-xs font-mono">
           Image Cover
@@ -175,10 +174,8 @@ function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModa
         />
       )}
       
-      {/* Gradasi Gelap Biar Teks Keliatan */}
       <div className="absolute inset-0 bg-linear-to-t from-bg-main via-bg-main/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
-      {/* Logo Kecil Melayang */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-12 md:h-12 bg-black/30 backdrop-blur-md rounded-lg border border-white/0 p-1 md:p-1.5 flex items-center justify-center shadow-lg transition-transform duration-500 group-hover:scale-105 group-hover:border-gold/40">
         {logoError ? (
           <span className="text-xs md:text-lg">🏆</span>
@@ -192,7 +189,6 @@ function CompetitionCard({ cabang, description, link_logo, link_foto, onOpenModa
         )}
       </div>
 
-      {/* Konten Teks */}
       <div className="relative z-10 p-3 md:p-5 transform transition-transform duration-500 ease-out group-hover:-translate-y-1 md:group-hover:-translate-y-2">
         <h3 className="font-display font-bold text-sm md:text-xl text-text-main group-hover:text-gold transition-colors leading-tight drop-shadow-md">
           {cabang}
@@ -212,7 +208,6 @@ export default function CompetitionsPage() {
   const REGISTRATION_URL = "https://tally.so/r/YOUR_ID_HERE"; 
   const GUIDEBOOK_URL = "/guidebook.pdf"; 
 
-  // State untuk mengontrol data popup modal lomba (Dipakai bareng Alimpiad & Alympic)
   const [activeModal, setActiveModal] = useState(null);
 
   return (
@@ -220,8 +215,6 @@ export default function CompetitionsPage() {
       
       {/* ================= 1. HERO CTA SECTION ================= */}
       <section className="relative h-[75vh] md:h-[82vh] w-full flex flex-col items-center justify-center text-center px-6 pt-16 pb-6 overflow-hidden">
-        
-        {/* GAMBAR BACKGROUND HERO BARU */}
         <div className="absolute inset-0 w-full h-full z-0">
           <img
             src="/competition_hero.webp"
@@ -289,88 +282,97 @@ export default function CompetitionsPage() {
           </span>
         </div>
       </section>
-      <AlimpiadCard/>
-      {/* ================= 2. SECTION ALIMPIAD (GRID LOMBA BARU) ================= */}
-      <section id="alimpiad-sma" className="w-full bg-linear-to-b from-bg-main to-[#060a14] py-12 md:py-16 px-4 md:px-12 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          
-          {/* Header Segment ALIMPIAD */}
-          <div className="flex flex-col items-center justify-center text-center mb-10 md:mb-16">
-            <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-[#0f1a35] border-2 border-gold p-3 md:p-4 shadow-[0_0_30px_rgba(201,168,76,0.2)] mb-4 flex items-center justify-center">
-              <img 
-                src="/logo_olimpiade_smp.png" 
-                alt="Logo ALIMPIAD" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentNode.innerHTML = `<span class="text-2xl md:text-3xl">🏆</span>`;
-                }}
-              />
+
+      <AlimpiadCard id="sport"/>
+
+      {/* ================= NEW UNIFIED WRAPPER FOR ALIMPIAD & ALYMPIC ================= */}
+      {/* This wrapper blends across both categories using a continuous linear-to-bl gradient */}
+      <div className="w-full bg-linear-to-bl from-transparent via-black/20 to-black/50 relative z-10">
+        
+        {/* ================= 2. SECTION ALIMPIAD ================= */}
+        <section id="alimpiad-sma" className="w-full py-12 md:py-16 px-4 md:px-12">
+          <div className="max-w-6xl mx-auto">
+            
+            {/* Header Segment ALIMPIAD */}
+            <div className="flex flex-col items-center justify-center text-center mb-10 md:mb-16">
+              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-[#0f1a35]/60 backdrop-blur-md border-2 border-gold p-3 md:p-4 shadow-[0_0_30px_rgba(201,168,76,0.2)] mb-4 flex items-center justify-center">
+                <img 
+                  src="/logo_olimpiade_smp.png" 
+                  alt="Logo ALIMPIAD" 
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentNode.innerHTML = `<span class="text-2xl md:text-3xl">🏆</span>`;
+                  }}
+                />
+              </div>
+              <span className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase font-semibold">Tingkat Menengah</span>
+              <h2 className="text-2xl md:text-5xl font-bold font-display text-text-main mt-1 tracking-wider" style={{ fontFamily: "var(--font-cinzel)" }}>
+                ALIMPIAD Ilmiah
+              </h2>
+              <div className="w-12 md:w-16 h-[1px] bg-gold/30 mx-auto mt-4" />
             </div>
-            <span className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase font-semibold">Tingkat Menengah</span>
-            <h2 className="text-2xl md:text-5xl font-bold font-display text-text-main mt-1 tracking-wider" style={{ fontFamily: "var(--font-cinzel)" }}>
-              ALIMPIAD Ilmiah
-            </h2>
-            <div className="w-12 md:w-16 h-[1px] bg-gold/30 mx-auto mt-4" />
-          </div>
 
-          {/* GRID RENDER CARD LOMBA ALIMPIAD */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-            {daftarLombaALIMPIAD.map((lomba, index) => (
-              <CompetitionCard 
-                key={index}
-                cabang={lomba.cabang}
-                description={lomba.description}
-                link_logo={lomba.link_logo}
-                link_foto={lomba.link_foto}
-                onOpenModal={(data) => setActiveModal(data)}
-              />
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================= 3. SECTION ALYMPIC SD (GRID LOMBA) ================= */}
-      <section id="alympic-sd" className="w-full bg-linera-to-b from-[#060a14] to-bg-main py-12 md:py-16 px-4 md:px-12 relative z-10 border-t border-white/5">
-        <div className="max-w-6xl mx-auto">
-          
-          {/* Header Segment ALYMPIC */}
-          <div className="flex flex-col items-center justify-center text-center mb-10 md:mb-16">
-            <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-[#0f1a35] border-2 border-gold p-3 md:p-4 shadow-[0_0_30px_rgba(201,168,76,0.2)] mb-4 flex items-center justify-center">
-              <img 
-                src="/logo_olimpiade_sd.png" 
-                alt="Logo ALYMPIC SD" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentNode.innerHTML = `<span class="text-2xl md:text-3xl">🎓</span>`;
-                }}
-              />
+            {/* GRID RENDER CARD LOMBA ALIMPIAD */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+              {daftarLombaALIMPIAD.map((lomba, index) => (
+                <CompetitionCard 
+                  key={index}
+                  cabang={lomba.cabang}
+                  description={lomba.description}
+                  link_logo={lomba.link_logo}
+                  link_foto={lomba.link_foto}
+                  onOpenModal={(data) => setActiveModal(data)}
+                />
+              ))}
             </div>
-            <span className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase font-semibold">Tingkat Sekolah Dasar</span>
-            <h2 className="text-2xl md:text-5xl font-bold font-display text-text-main mt-1 tracking-wider" style={{ fontFamily: "var(--font-cinzel)" }}>
-              ALYMPIC (SD) Ilmiah
-            </h2>
-            <div className="w-12 md:w-16 h-[1px] bg-gold/30 mx-auto mt-4" />
-          </div>
 
-          {/* GRID RENDER CARD LOMBA SD */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-            {daftarLombaALMPIC.map((lomba, index) => (
-              <CompetitionCard 
-                key={index}
-                cabang={lomba.cabang}
-                description={lomba.description}
-                link_logo={lomba.link_logo}
-                link_foto={lomba.link_foto}
-                onOpenModal={(data) => setActiveModal(data)}
-              />
-            ))}
           </div>
+        </section>
 
-        </div>
-      </section>
+        {/* ================= 3. SECTION ALYMPIC SD ================= */}
+        <section id="alympic-sd" className="w-full py-12 md:py-16 px-4 md:px-12 border-t border-white/5">
+          <div className="max-w-6xl mx-auto">
+            
+            {/* Header Segment ALYMPIC */}
+            <div className="flex flex-col items-center justify-center text-center mb-10 md:mb-16">
+              <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-[#0f1a35]/60 backdrop-blur-md border-2 border-gold p-3 md:p-4 shadow-[0_0_30px_rgba(201,168,76,0.2)] mb-4 flex items-center justify-center">
+                <img 
+                  src="/logo_olimpiade_sd.png" 
+                  alt="Logo ALYMPIC SD" 
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentNode.innerHTML = `<span class="text-2xl md:text-3xl">🎓</span>`;
+                  }}
+                />
+              </div>
+              <span className="text-gold text-[10px] md:text-xs tracking-[0.3em] uppercase font-semibold">Tingkat Sekolah Dasar</span>
+              <h2 className="text-2xl md:text-5xl font-bold font-display text-text-main mt-1 tracking-wider" style={{ fontFamily: "var(--font-cinzel)" }}>
+                ALYMPIC (SD) Ilmiah
+              </h2>
+              <div className="w-12 md:w-16 h-[1px] bg-gold/30 mx-auto mt-4" />
+            </div>
+
+            {/* GRID RENDER CARD LOMBA SD */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
+              {daftarLombaALMPIC.map((lomba, index) => (
+                <CompetitionCard 
+                  key={index}
+                  cabang={lomba.cabang}
+                  description={lomba.description}
+                  link_logo={lomba.link_logo}
+                  link_foto={lomba.link_foto}
+                  onOpenModal={(data) => setActiveModal(data)}
+                />
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+      {/* ================= END OF WRAPPER ================= */}
 
       {/* ================= 4. MODAL POPUP DETAIL LOMBA ================= */}
       <div
@@ -385,7 +387,6 @@ export default function CompetitionsPage() {
           }`}
           onClick={(e) => e.stopPropagation()} 
         >
-          {/* Header Modal */}
           <div className="flex justify-between items-start border-b border-white/10 pb-4 mb-4">
             <div>
               <span className="text-gold text-[10px] tracking-widest uppercase font-bold">Detail Cabang Lomba</span>
@@ -401,14 +402,12 @@ export default function CompetitionsPage() {
             </button>
           </div>
 
-          {/* Isi Deskripsi Lengkap */}
           <div className="space-y-4">
             <p className="text-text-muted text-sm md:text-base leading-relaxed font-sans whitespace-pre-line">
               {activeModal?.description}
             </p>
           </div>
 
-          {/* Footer Modal Action */}
           <div className="mt-8 pt-4 border-t border-white/5 flex justify-end gap-3">
             <button
               onClick={() => setActiveModal(null)}
