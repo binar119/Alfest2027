@@ -168,7 +168,7 @@ export default function Home() {
           {/* COUNTDOWN TIMER */}
           <div className="flex flex-col items-center gap-3">
             <span className="font-display text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-gold/80">
-              COUNTDOWN TO ALFEST 2027
+              COUNTDOWN TO ALBINAA FESTIVAL 2027
             </span>
 
             <div className="flex gap-4 md:gap-8 border border-text-muted/10 bg-bg-card/40 backdrop-blur-sm rounded-2xl px-6 py-4 md:px-10 shadow-sm transition-colors duration-300">
@@ -203,7 +203,7 @@ export default function Home() {
               What's Alfest?
             </h2>
             <p className="text-text-muted leading-relaxed">
-              Alfest adalah festival tahunan yang memadukan kompetisi, seni, dan
+              Albinaa festival adalah festival tahunan yang memadukan kompetisi, seni, dan
               kepedulian sosial dalam satu malam penuh cahaya. Diselenggarakan
               oleh siswa-siswi Albinaa IBS, festival ini hadir untuk menginspirasi
               generasi muda.
@@ -223,7 +223,7 @@ export default function Home() {
           <div className="text-center">
             <p className="text-gold text-sm tracking-[0.3em] uppercase mb-2">Official Media</p>
             <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-main">
-              Alfest Trailer
+              Albinaa festival Trailer
             </h2>
           </div>
           
@@ -298,28 +298,44 @@ export default function Home() {
                 </Link>
               </div>
             ))}
-          </div>
-          <EventGrid/>
-        </div> 
+         {/* Kode sebelum baris 301 ... */}
+      </div>
+      <EventGrid />
+    </div>
 
-        <div className="filter select-none items-center justify-center text-center mt-10 mb-10">
-          <h1 className="font-display text-3xl md:text-5xl font-semibold tracking-wider text-text-main md:whitespace-nowrap mt-20">
-            EVENT TIMELINE
-          </h1>
-          <img
-            src="/sponsors_compiled.webp"
-            alt="Alfest Event Sponsors"
-            className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(0,0,0,0.6)] mix-blend-multiply dark:mix-blend-normal mt-20"
-          />
-        </div>   
+    {/* SEKSI GRAFIK TIMELINE BARU KITA */}
+    <div className="w-full mt-10 mb-10">
+      {/* Kita panggil komponen grafik timeline Mobile Legends di sini */}
+      <TimelineEvent /> 
+    </div>
 
+    {/* Judul Event Timeline & Logo Sponsor Bawaan (Bisa ditaruh di bawahnya) */}
+    <div className="filter select-none items-center justify-center text-center mt-10 mb-10">
+      <h1 className="font-display text-3xl md:text-5xl font-semibold tracking-wider text-text-main">
+        EVENT SPONSORS
+      </h1>
+      <img 
+        src="/sponsors_compiled.webp"
+        alt="Alfest Event Sponsors"
+        className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+      />
+    </div>
+</section> {/* Ini penutup untuk section sponsor */}
+
+      {/* SEKSI BARU: Tempat Grafik Timeline Kita */}
+      <section className="filter select-none items-center justify-center text-center mt-16 mb-10 px-4 md:px-8">
+        <h1 className="font-display text-3xl md:text-5xl font-semibold tracking-wider text-text-main mb-6">
+          EVENT TIMELINE
+        </h1>
+        <TimelineEvent />
       </section>
 
+      {/* SEKSI BAWAAN: Tulisan Ready For Alfest */}
       <div className="filter select-none items-center justify-center text-center mt-10 mb-10">
-        <h1 className="font-display text-3xl md:text-2xl font-semibold tracking-wider text-text-main md:whitespace-nowrap">
-          READY FOR ALBINAA FESTIVAL? 
+        <h1 className="font-display text-3xl md:text-5xl font-semibold tracking-wider text-text-main">
+          READY FOR ALBINAA FESTIVAL?
         </h1>
-      </div>   
+      </div>
 
       <ContactWidget />
     </main>
