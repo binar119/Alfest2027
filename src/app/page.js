@@ -1,5 +1,6 @@
 "use client";
 
+import TimelineEvent from '../components/TimelineEvent';
 import Image from "next/image"
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
