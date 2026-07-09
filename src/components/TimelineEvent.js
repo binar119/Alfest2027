@@ -1,9 +1,9 @@
 import React from 'react';
 
 const timelineData = [
-  { name: "Early Bird", label: "20 Nov - 4 Des", pos: "col-start-1 col-end-2", color: "from-amber-500 to-orange-600" },
-  { name: "Batch 1", label: "4 Des - 27 Des", pos: "col-start-2 col-end-3", color: "from-orange-500 to-red-600" },
-  { name: "Batch 2", label: "28 Des - 27 Jan", pos: "col-start-3 col-end-4", color: "from-red-500 to-pink-600" },
+  { name: "Early Bird Regist", label: "20 Nov - 4 Des", pos: "col-start-1 col-end-2", color: "from-amber-500 to-orange-600" },
+  { name: "Batch 1 Regist", label: "4 Des - 27 Des", pos: "col-start-2 col-end-3", color: "from-orange-500 to-red-600" },
+  { name: "Batch 2 Regist", label: "28 Des - 27 Jan", pos: "col-start-3 col-end-4", color: "from-red-500 to-pink-600" },
   { name: "Technical Meeting", label: "05 Feb", pos: "col-start-4 col-end-5", color: "from-cyan-500 to-blue-600" },
   { name: "Opening Alfest", label: "15 Feb", pos: "col-start-5 col-end-6", color: "from-emerald-500 to-teal-600" },
   { name: "🚀 Alfest Bazar & Expo", label: "15 - 19 Feb", pos: "col-start-5 col-end-10", color: "from-purple-500 to-indigo-600" },
@@ -18,15 +18,15 @@ const timelineData = [
 ];
 
 const timelineColumns = [
-  { label: "20/11 - 4/12", desc: "Early Bird" },
-  { label: "4/12 - 27/12", desc: "Batch 1" },
-  { label: "28/12 - 27/1", desc: "Batch 2" },
-  { label: "5/2", desc: "TM" },
-  { label: "15/2", desc: "Opening/D1" },
+  { label: "20/11 - 4/12", desc: "Early Bird Regist" },
+  { label: "4/12 - 27/12", desc: "Batch 1 Regist" },
+  { label: "28/12 - 27/1", desc: "Batch 2 Regist" },
+  { label: "5/2", desc: "Technical Meeting" },
+  { label: "15/2", desc: "Opening/Day 1" },
   { label: "16/2", desc: "Day 2" },
   { label: "17/2", desc: "Day 3" },
   { label: "18/2", desc: "Day 4" },
-  { label: "19/2", desc: "Closing/D5" },
+  { label: "19/2", desc: "Closing/Day 5" },
   { label: "17/3 - 20/3", desc: "Philanthropy" }
 ];
 
