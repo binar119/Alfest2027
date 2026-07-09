@@ -5,7 +5,7 @@ export default function SponsorshipPage() {
   const sponsorTiers = [
     {
       title: "Bronze",
-      desc: "Paket kemitraan awal untuk mendukung kesuksesan Alfest 2027.",
+      desc: "Paket kemitraan awal untuk mendukung kesuksesan Albinaa Festival 2027.",
       logoPlaceholder: "BRONZE",
       textColor: "text-amber-500",
       shadowColor: "hover:shadow-amber-500/30",
@@ -25,7 +25,7 @@ export default function SponsorshipPage() {
       logoPlaceholder: "GOLD",
       textColor: "text-yellow-600",
       shadowColor: "hover:shadow-yellow-500/40",
-      benefits: ["Logo ukuran besar di backdrop utama", "Stan pameran / Booth ukuran standar (2x2m)", "Dedicating Post di Feed Instagram Alfest", "Adlips oleh MC di setiap pembukaan & penutupan", "Pencantuman logo di t-shirt panitia"],
+      benefits: ["Logo ukuran besar di backdrop utama", "Stan pameran / Booth ukuran standar (2x2m)", "Dedicating Post di Feed Instagram Albinaa Festival", "Adlips oleh MC di setiap pembukaan & penutupan", "Pencantuman logo di t-shirt panitia"],
     },
     {
       title: "Platinum",
@@ -33,15 +33,15 @@ export default function SponsorshipPage() {
       logoPlaceholder: "PLATINUM",
       textColor: "text-cyan-700",
       shadowColor: "hover:shadow-cyan-400/40",
-      benefits: ["Logo ukuran ekstra besar di semua media cetak & digital", "Stan pameran / Booth di area VIP (3x3m)", "Logo dipasang di video teaser & dokumentasi utama", "Promosi berkala di seluruh media sosial Alfest", "Slot khusus pengenalan produk di panggung utama (5 menit)"],
+      benefits: ["Logo ukuran ekstra besar di semua media cetak & digital", "Stan pameran / Booth di area VIP (3x3m)", "Logo dipasang di video teaser & dokumentasi utama", "Promosi berkala di seluruh media sosial Albinaa Festival", "Slot khusus pengenalan produk di panggung utama (5 menit)"],
     },
     {
       title: "Diamond / Utama",
-      desc: "Mitra utama Alfest 2027. Hak branding tertinggi dan eksklusivitas industri penuh.",
+      desc: "Mitra utama Albinaa Festival 2027. Hak branding tertinggi dan eksklusivitas industri penuh.",
       logoPlaceholder: "DIAMOND",
       textColor: "text-indigo-600",
       shadowColor: "hover:shadow-purple-500/50",
-      benefits: ["Hak penamaan event (Alfest 2027 dipersembahkan oleh Brand Anda)", "Logo eksklusif di main stage & tiket masuk", "Stan VIP Utama di lokasi strategis", "Hak distribusi produk tunggal di area festival", "Durasi promosi khusus di panggung utama setiap hari (10 menit)", "Plakat penghargaan fisik eksklusif"],
+      benefits: ["Hak penamaan event (Albinaa Festival 2027 dipersembahkan oleh Brand Anda)", "Logo eksklusif di main stage & tiket masuk", "Stan VIP Utama di lokasi strategis", "Hak distribusi produk tunggal di area festival", "Durasi promosi khusus di panggung utama setiap hari (10 menit)", "Plakat penghargaan fisik eksklusif"],
     },
     {
       title: "TAJIR BOS",
@@ -61,7 +61,7 @@ export default function SponsorshipPage() {
           SPONSORSHIP OPPORTUNITIES
         </h1>
         <p className="text-slate-400 max-w-2xl mx-auto text-base md:text-lg mb-10">
-          Bergabunglah sebagai mitra strategis Alfest 2027 dan hubungkan brand Anda dengan ribuan partisipan.
+          Bergabunglah sebagai mitra strategis Albinaa Festival 2027 dan hubungkan brand Anda dengan ribuan partisipan.
         </p>
 
         {/* TOMBOL DOWNLOAD */}

@@ -102,7 +102,7 @@ export default function Home() {
       <div className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden z-10">
         <Image
           src="/hero_anjay.webp" 
-          alt="Alfest 2027 Hero Background"
+          alt="Albinaa Festival 2027 Hero Background"
           fill
           priority
           sizes="100vw"
@@ -201,7 +201,7 @@ export default function Home() {
               Tentang Kami
             </p>
             <h2 className="font-display text-5xl font-semibold text-text-main">
-              What's Alfest?
+              What's Albinaa Festival?
             </h2>
             <p className="text-text-muted leading-relaxed">
               Albinaa festival adalah festival tahunan yang memadukan kompetisi, seni, dan
@@ -232,7 +232,7 @@ export default function Home() {
             <iframe
               className="w-full h-full"
               src="https://www.youtube.com/embed/t_D1HQrHCFg"
-              title="Alfest Official Trailer"
+              title="Albinaa Festival Official Trailer"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             ></iframe>
@@ -253,7 +253,7 @@ export default function Home() {
           <div className="w-full bg-bg-card/40 dark:bg-white/5 backdrop-blur-xs rounded-2xl border border-text-muted/10 p-6 md:p-10 shadow-md flex justify-center items-center overflow-hidden transition-all duration-300 hover:border-gold/20">
             <img
               src="/sponsors_compiled.webp"
-              alt="Alfest Event Sponsors"
+              alt="Albinaa Festival Event Sponsors"
               className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(0,0,0,0.6)] mix-blend-multiply dark:mix-blend-normal opacity-90 dark:opacity-100"
             />
           </div>
@@ -317,7 +317,7 @@ export default function Home() {
       </h1>
       <img 
         src="/sponsors_compiled.webp"
-        alt="Alfest Event Sponsors"
+        alt="Albinaa Festival Event Sponsors"
         className="w-full h-auto object-contain max-h-60 md:max-h-80 filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
       />
     </div>
@@ -331,7 +331,7 @@ export default function Home() {
         <TimelineEvent />
       </section>
 
-      {/* SEKSI BAWAAN: Tulisan Ready For Alfest */}
+      {/* SEKSI BAWAAN: Tulisan Ready For Albinaa Festival */}
       <div className="filter select-none items-center justify-center text-center mt-10 mb-10">
         <h1 className="font-display text-3xl md:text-5xl font-semibold tracking-wider text-text-main">
           READY FOR ALBINAA FESTIVAL?

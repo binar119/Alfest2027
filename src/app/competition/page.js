@@ -218,7 +218,7 @@ export default function CompetitionsPage() {
         <div className="absolute inset-0 w-full h-full z-0">
           <img
             src="/competition_hero.webp"
-            alt="Alfest Competitions Hero"
+            alt="Albinaa Festival Competitions Hero"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-bg-main/85 backdrop-blur-xs" />
