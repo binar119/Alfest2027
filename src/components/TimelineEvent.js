@@ -133,16 +133,6 @@ export default function TimelineEvent() {
                     {/* Efek Kilau Highlight pas Hover */}
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none"></div>
 
-                    {/* ================= 3. IKON BERUBAH SAAT DIKLIK/AKTIF ================= */}
-                    <div className="w-8 h-8 rounded bg-black/40 border border-white/20 flex-shrink-0 flex items-center justify-center overflow-hidden shadow-inner">
-                      <img 
-                        src={isActive ? event.imgActive : event.imgNormal} 
-                        alt="" 
-                        className={`w-full h-full object-cover transition-transform duration-300 ${isActive ? 'scale-110' : ''}`}
-                        onError={(e) => { e.target.src = "/favicon.ico" }} // Fallback kalau file gambar belum ditaruh
-                      />
-                    </div>
-
                     <div className="truncate text-left">
                       <div className="font-bold text-xs truncate text-white">
                         {event.name}
